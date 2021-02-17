@@ -38,20 +38,34 @@ def newCatalog():
     catalog = {'videos':None,
                'categories':None}
 # Construccion de modelos
-    catalog['videos'] = lt.newList()
-    catalog['categories'] = lt.newList()
+    catalog['videos'] = lt.newList(datastructure='ARRAY_LIST')
+    catalog['categories'] = lt.newList(datastructure='ARRAY_LIST')
     return catalog
 
 # Funciones para agregar informacion al catalogo
 def addVideo(catalog, video):
     lt.addLast(catalog['videos'], video)
 
+def newCategory(name, id):
+    
+    """cats = cat.split()
+    category = {'id':'', 'name':''}
+    category['id'] = cats[0]
+    category['category'] = cats[1]
+    return category"""
+
+    category = {'id': '', 'name': ''}
+    category['name'] = name
+    category['cat_id'] = id
+    return category
+
 def addCategories(catalog, category):
+    #c = newCategory(category['id'], category['name'])
     lt.addLast(catalog['categories'], category)
 # Funciones para creacion de datos
 
 # Funciones de consulta
 
 # Funciones utilizadas para comparar elementos dentro de una lista
-
+#def comparSections()
 # Funciones de ordenamiento

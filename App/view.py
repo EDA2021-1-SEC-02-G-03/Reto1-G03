@@ -62,11 +62,21 @@ while True:
         print("Cargando información de los archivos ....")
         catalog = initCatalog()
         loadData(catalog)
-        print('Libros cargados: '+str(lt.size(catalog['videos'])))
-        print('Categorias cargadas '+str(lt.size(catalog['categories'])))
-
+        print('Videos cargados: '+str(lt.size(catalog['videos'])))
+        informacion1 = lt.getElement(catalog['videos'], 0)
+        print('title: ' + str(informacion1['title'])+'\n' +'Channel title: '+ str(informacion1['channel_title']+'\n') 
+        +'trending date: '+ str(informacion1['trending_date'])+'\n' +'country: '+ str(informacion1['country'])+'\n' +
+         'views: '+str(informacion1['views'])+'\n' +'likes:'+ str(informacion1['likes'])+'\n' +'dislikes: '+ str(informacion1['dislikes'])+'\n')
+        print('Categorias cargadas: ')
+        #print(str(lt.getElement(catalog['categories'], 2)))
+        print('id ', 'name')
+        for i in catalog['categories']['elements']:
+            print(i['id'], i['name'])
+        #print(i)
+        #print(catalog['categories'])
 
     elif int(inputs[0]) == 2:
+    
         pass
 
     else:
