@@ -41,6 +41,8 @@ def printMenu():
     print("3- Consultar el video que más días ha sido trending dado un país específico.")
     print("4- Consultar el video que más días ha sido trending para una categoría específica.")
     print("5- Consultar cuales son los videos diferentes con más likes en un país con un tag específico.")
+    print("0- Salir")
+
 
 def initCatalog():
     return controller.initCatalog()
@@ -61,10 +63,13 @@ while True:
         catalog = initCatalog()
         loadData(catalog)
         print('Libros cargados: '+str(lt.size(catalog['videos'])))
+        print('Categorias cargadas '+str(lt.size(catalog['categories'])))
+
 
     elif int(inputs[0]) == 2:
         pass
 
     else:
+    
         sys.exit(0)
 sys.exit(0)

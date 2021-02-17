@@ -37,10 +37,17 @@ def initCatalog():
 
 def loadData(catalog):
     loadVideos(catalog)
+    loadCategories(catalog)
 # Funciones de ordenamiento
 def loadVideos(catalog):
     videos_file = cf.data_dir + 'videos/videos-small.csv'
     input_file = csv.DictReader(open(videos_file, encoding='utf-8'))
     for video in input_file:
         model.addVideo(catalog, video)
+
+def loadCategories(catalog):
+    videos_file = cf.data_dir + 'videos/category-id.csv'
+    input_file = csv.DictReader(open(videos_file, encoding='utf-8'))
+    for category in input_file:
+        model.addCategories(catalog, category)
 # Funciones de consulta sobre el catálogo

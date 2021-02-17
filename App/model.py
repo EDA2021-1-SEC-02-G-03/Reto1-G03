@@ -36,15 +36,18 @@ los mismos.
 """
 def newCatalog():
     catalog = {'videos':None,
-               'categorias':None}
+               'categories':None}
 # Construccion de modelos
     catalog['videos'] = lt.newList()
-    catalog['categorias'] = lt.newList()
+    catalog['categories'] = lt.newList()
     return catalog
 
 # Funciones para agregar informacion al catalogo
 def addVideo(catalog, video):
     lt.addLast(catalog['videos'], video)
+
+def addCategories(catalog, category):
+    lt.addLast(catalog['categories'], category)
 # Funciones para creacion de datos
 
 # Funciones de consulta
