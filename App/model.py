@@ -73,5 +73,11 @@ def addCategories(catalog, category):
 # Funciones de consulta
 
 # Funciones utilizadas para comparar elementos dentro de una lista
-#def comparSections()
-# Funciones de ordenamiento
+def cmpVideosByViews(video1, video2):
+    #Esta función devuelve True si "views" video1 < video2
+    return (int(video1['views']) < int(video2['views']))
+
+    #def comparSections()
+# Funciones de ordenamiento    
+def sort_videos(catalog):
+    sa.sort(catalog['videos'], cmpVideosByViews)

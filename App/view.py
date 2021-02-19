@@ -74,21 +74,33 @@ while True:
             print('title: ' + str(informacion1['title'])+'\n' +'Channel title: '+ str(informacion1['channel_title']+'\n') 
             +'trending date: '+ str(informacion1['trending_date'])+'\n' +'country: '+ str(informacion1['country'])+'\n' +
             'views: '+str(informacion1['views'])+'\n' +'likes:'+ str(informacion1['likes'])+'\n' +'dislikes: '+ str(informacion1['dislikes'])+'\n')
+            #print(lt.getElement(catalog['videos'], 0))
             print('Categorias cargadas: ')
             #print(tipo_lista)
             #print(type(catalog['categories']))
             #print(tipo_lista)
             #print(str(lt.getElement(catalog['categories'], 2)))
-            print(catalog['categories'])
+            #print(catalog['categories'])
+            #print(lt.getElement(catalog['categories'], 0))
             print('id ', 'name')
-            for i in catalog['categories']['elements']:
-                print(i['id'], i['name'])
+            for i in range(lt.size(catalog['categories'])):
+                element = lt.getElement(catalog['categories'], i)
+                print(element['id'], element['name'])
+                #print(i['id'], i['name'])
             #print(i)
             #print(catalog['categories'])
 
     elif int(inputs[0]) == 2:
-    
-        pass
+        category_name = input('Ingrese una categoria')
+        country = input('Ingrese un país')
+        tamano_lista = int(input('Ingrese el número de videos que quiere listar'))
+        videos = lt.subList(catalog['videos'], 0, tamano_lista)
+        print('trending_date', 'title', 'channel_title', 'publish_time',
+        'views', 'likes', 'dislikes')
+        for video in range(lt.size(videos)):
+            element = lt.getElement(videos, video)
+            print(element['channel_title'], element['views'])
+        
 
     else:
     
