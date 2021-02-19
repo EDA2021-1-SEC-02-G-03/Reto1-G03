@@ -30,8 +30,10 @@ El controlador se encarga de mediar entre la vista y el modelo.
 """
 
 # Inicialización del Catálogo de libros
-def initCatalog():
-    catalog = model.newCatalog()
+#Aqui el option lo que va a hacer es permitirnos escoger entre
+#las opcoines de ARRY_LIST y LINKED_LIST
+def initCatalog(option):
+    catalog = model.newCatalog(option)
     return catalog
 # Funciones para la carga de datos
 

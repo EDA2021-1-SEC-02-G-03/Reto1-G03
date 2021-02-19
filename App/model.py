@@ -34,31 +34,37 @@ assert cf
 Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las categorias de
 los mismos.
 """
-def newCatalog():
+def newCatalog(option):
     catalog = {'videos':None,
                'categories':None}
 # Construccion de modelos
-    catalog['videos'] = lt.newList(datastructure='ARRAY_LIST')
-    catalog['categories'] = lt.newList(datastructure='ARRAY_LIST')
+    tipo_de_lista = ''
+    if option == '1':
+        tipo_de_lista = 'ARRAY_LIST'
+    elif option == '2':
+        tipo_de_lista = 'LINKED_LIST'
+
+    catalog['videos'] = lt.newList(datastructure=tipo_de_lista)
+    catalog['categories'] = lt.newList(datastructure=tipo_de_lista)
     return catalog
 
 # Funciones para agregar informacion al catalogo
 def addVideo(catalog, video):
     lt.addLast(catalog['videos'], video)
 
-def newCategory(name, id):
+"""def newCategory(name, id):
     
-    """cats = cat.split()
+    cats = cat.split()
     category = {'id':'', 'name':''}
     category['id'] = cats[0]
     category['category'] = cats[1]
-    return category"""
+    return category
 
     category = {'id': '', 'name': ''}
     category['name'] = name
     category['cat_id'] = id
     return category
-
+"""
 def addCategories(catalog, category):
     #c = newCategory(category['id'], category['name'])
     lt.addLast(catalog['categories'], category)
