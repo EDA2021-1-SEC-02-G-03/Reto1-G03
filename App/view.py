@@ -49,6 +49,7 @@ def initCatalog(option):
 
 def loadData(catalog):
     controller.loadData(catalog)
+    controller.sort_videos(catalog)
 
 catalog = None
 
@@ -70,7 +71,7 @@ while True:
             catalog = initCatalog(tipo_lista)
             loadData(catalog)
             print('Videos cargados: '+str(lt.size(catalog['videos'])))
-            informacion1 = lt.getElement(catalog['videos'], 0)
+            informacion1 = lt.getElement(catalog['videos'], 1)
             print('title: ' + str(informacion1['title'])+'\n' +'Channel title: '+ str(informacion1['channel_title']+'\n') 
             +'trending date: '+ str(informacion1['trending_date'])+'\n' +'country: '+ str(informacion1['country'])+'\n' +
             'views: '+str(informacion1['views'])+'\n' +'likes:'+ str(informacion1['likes'])+'\n' +'dislikes: '+ str(informacion1['dislikes'])+'\n')
@@ -91,16 +92,21 @@ while True:
             #print(catalog['categories'])
 
     elif int(inputs[0]) == 2:
+        tamano_datos_cargados = lt.size(catalog['videos'])+1
         category_name = input('Ingrese una categoria')
-        country = input('Ingrese un país')
-        tamano_lista = int(input('Ingrese el número de videos que quiere listar'))
-        videos = lt.subList(catalog['videos'], 0, tamano_lista)
+        #country = input('Ingrese un país')
+        tamano_lista = int(input('Ingrese el número de videos que quiere listar: '))
+        if tamano_lista > lt.size(catalog['videos']):
+            print("El número que ingresó excede la cantidad de videos cargados")
+        #videos = lt.subList(catalog['videos'], tamano_datos_cargados - tamano_lista, tamano_datos_cargados)
+        videos = lt.subList(catalog['videos'], 1, tamano_lista)
         print('trending_date', 'title', 'channel_title', 'publish_time',
         'views', 'likes', 'dislikes')
-        for video in range(lt.size(videos)):
-            element = lt.getElement(videos, video)
-            print(element['channel_title'], element['views'])
-        
+        for video in range(1, lt.size(videos)+1): 
+            element = lt.getElement(catalog['videos'], video)
+            print(element['trending_date'], element['title'],
+             element['channel_title'], element['publish_time'],
+              element['views'], element['likes'], element['dislikes'])
 
     else:
     
