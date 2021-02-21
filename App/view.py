@@ -103,7 +103,7 @@ while True:
         tipo_ordenamiento = int(input('Ingrese el número del tipo de algoritmo de ordenamiento que desea\n 1- Selection Sort \n 2- Insertion Sort \n 3- Shell sort \n'))
         result = controller.sort_videos(catalog, tipo_ordenamiento, tamano_lista)
         print("Para la muestra de ",tamano_lista,
-        "elementos, el timpeo (msg) es: ", str(result[0]))
+        "elementos, el tiempo (mseg) es: ", str(result[0]))
         #videos = lt.subList(catalog['videos'], tamano_datos_cargados - tamano_lista, tamano_datos_cargados)
         #videos = lt.subList(catalog['videos'], 1, tamano_lista)
         #print('trending_date', 'title', 'channel_title', 'publish_time',
