@@ -49,7 +49,8 @@ def initCatalog(option):
 
 def loadData(catalog):
     controller.loadData(catalog)
-    controller.sort_videos(catalog)
+    #controller.sort_videos(catalog)
+
 
 catalog = None
 
@@ -70,6 +71,7 @@ while True:
         else:
             catalog = initCatalog(tipo_lista)
             loadData(catalog)
+            #sort_videos(catalog, 3)
             print('Videos cargados: '+str(lt.size(catalog['videos'])))
             informacion1 = lt.getElement(catalog['videos'], 1)
             print('title: ' + str(informacion1['title'])+'\n' +'Channel title: '+ str(informacion1['channel_title']+'\n') 
@@ -93,21 +95,28 @@ while True:
 
     elif int(inputs[0]) == 2:
         tamano_datos_cargados = lt.size(catalog['videos'])+1
-        category_name = input('Ingrese una categoria')
+        #category_name = input('Ingrese una categoria')
         #country = input('Ingrese un país')
         tamano_lista = int(input('Ingrese el número de videos que quiere listar: '))
-        if tamano_lista > lt.size(catalog['videos']):
+        if tamano_lista > tamano_datos_cargados:
             print("El número que ingresó excede la cantidad de videos cargados")
+        tipo_ordenamiento = int(input('Ingrese el número del tipo de algoritmo de ordenamiento que desea\n 1- Selection Sort \n 2- Insertion Sort \n 3- Shell sort \n'))
+        result = controller.sort_videos(catalog, tipo_ordenamiento, tamano_lista)
+        print("Para la muestra de ",tamano_lista,
+        "elementos, el timpeo (msg) es: ", str(result[0]))
         #videos = lt.subList(catalog['videos'], tamano_datos_cargados - tamano_lista, tamano_datos_cargados)
-        videos = lt.subList(catalog['videos'], 1, tamano_lista)
-        print('trending_date', 'title', 'channel_title', 'publish_time',
-        'views', 'likes', 'dislikes')
-        for video in range(1, lt.size(videos)+1): 
-            element = lt.getElement(catalog['videos'], video)
+        #videos = lt.subList(catalog['videos'], 1, tamano_lista)
+        #print('trending_date', 'title', 'channel_title', 'publish_time',
+        #'views', 'likes', 'dislikes')
+        """for video in range(1, tamano_lista+1): 
+            element = lt.getElement(result[1], video)
+            #Esto es para la parte del reto 1 completo
+            #if (lt.getElement(catalog['country']) == country and 
+            #lt.getElement(catalog['category_id'] == ) 
             print(element['trending_date'], element['title'],
              element['channel_title'], element['publish_time'],
-              element['views'], element['likes'], element['dislikes'])
-
+          element['views'], element['likes'], element['dislikes'])
+        """    
     else:
     
         sys.exit(0)

@@ -26,8 +26,11 @@
 
 
 import config as cf
+import time
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.Algorithms.Sorting import insertionsort as ins
+from DISClib.Algorithms.Sorting import selectionsort as ses
 assert cf
 
 """
@@ -71,6 +74,10 @@ def addCategories(catalog, category):
 # Funciones para creacion de datos
 
 # Funciones de consulta
+def find_position_category(category_list, id, category_s, category):
+    #for element in range(lt.size(category_list)):
+        #if category
+    pass
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 def cmpVideosByViews(video1, video2):
@@ -79,5 +86,15 @@ def cmpVideosByViews(video1, video2):
 
     #def comparSections()
 # Funciones de ordenamiento    
-def sort_videos(catalog):
-    sa.sort(catalog['videos'], cmpVideosByViews)
+def sort_videos(catalog, tipo, tamano):
+    sub_list = lt.subList(catalog['videos'], 0, tamano)
+    start_time = time.process_time()
+    if tipo == 1:
+        sorted_list = ses.sort(sub_list, cmpVideosByViews)
+    elif tipo == 2:
+        sorted_list = ins.sort(sub_list, cmpVideosByViews)
+    elif tipo == 3:
+        sorted_list = sa.sort(sub_list, cmpVideosByViews)
+    stop_time = time.process_time()
+    elapsed_time_mseg = (stop_time - start_time)*1000
+    return elapsed_time_mseg, sorted_list

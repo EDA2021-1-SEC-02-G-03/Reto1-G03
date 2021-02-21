@@ -40,7 +40,7 @@ def initCatalog(option):
 def loadData(catalog):
     loadVideos(catalog)
     loadCategories(catalog)
-    sort_videos(catalog)
+    #sort_videos(catalog, tipo)
 # Funciones de ordenamiento
 def loadVideos(catalog):
     videos_file = cf.data_dir + 'videos/videos-small.csv'
@@ -54,7 +54,9 @@ def loadCategories(catalog):
     for category in input_file:
         model.addCategories(catalog, category)
 
-def sort_videos(catalog):
-    model.sort_videos(catalog)
+def sort_videos(catalog, tipo, tamano):
+    return model.sort_videos(catalog, tipo, tamano)
 
+def find_position_category():
+    pass
 # Funciones de consulta sobre el catálogo
