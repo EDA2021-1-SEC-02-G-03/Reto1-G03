@@ -100,7 +100,7 @@ while True:
         tamano_lista = int(input('Ingrese el número de videos que quiere listar: '))
         if tamano_lista > tamano_datos_cargados:
             print("El número que ingresó excede la cantidad de videos cargados")
-        tipo_ordenamiento = int(input('Ingrese el número del tipo de algoritmo de ordenamiento que desea\n 1- Selection Sort \n 2- Insertion Sort \n 3- Shell sort \n'))
+        tipo_ordenamiento = int(input('Ingrese el número del tipo de algoritmo de ordenamiento que desea\n 1- Quick Sort \n 2- Merge Sort \n'))
         result = controller.sort_videos(catalog, tipo_ordenamiento, tamano_lista)
         print("Para la muestra de ",tamano_lista,
         "elementos, el tiempo (mseg) es: ", str(result[0]))
