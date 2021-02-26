@@ -8,12 +8,7 @@ def prueba(tamano_lista:int,tipo_lista:int,tipo_ordenamiento:int)->float:
     tipo_lista=str(tipo_lista)
     catalog = controller.initCatalog(tipo_lista)
     controller.loadData(catalog)
-    informacion1 = lt.getElement(catalog['videos'], 1)
-    for i in range(lt.size(catalog['categories'])):
-        element = lt.getElement(catalog['categories'], i)
     tamano_datos_cargados = lt.size(catalog['videos'])+1
-    if tamano_lista > tamano_datos_cargados:
-        print("El número que ingresó excede la cantidad de videos cargados")
     result = controller.sort_videos(catalog, tipo_ordenamiento, tamano_lista)
     return float(result[0])
 
