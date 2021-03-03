@@ -58,5 +58,6 @@ def sort_videos(catalog, tipo, tamano):
     return model.sort_videos(catalog, tipo, tamano)
 
 def find_position_category():
+    
     pass
 # Funciones de consulta sobre el catálogo
