@@ -32,18 +32,18 @@ El controlador se encarga de mediar entre la vista y el modelo.
 # Inicialización del Catálogo de libros
 #Aqui el option lo que va a hacer es permitirnos escoger entre
 #las opcoines de ARRY_LIST y LINKED_LIST
-def initCatalog(option):
-    catalog = model.newCatalog(option)
+def initCatalog():
+    catalog = model.newCatalog()
     return catalog
 
 # Funciones para la carga de datos
 def loadData(catalog):
     loadVideos(catalog)
     loadCategories(catalog)
-    #sort_videos(catalog, tipo)
-# Funciones de ordenamiento
+    sort_videos(catalog)
+
 def loadVideos(catalog):
-    videos_file = cf.data_dir + 'videos/videos-large.csv'
+    videos_file = cf.data_dir + 'videos/videos-small.csv'
     input_file = csv.DictReader(open(videos_file, encoding='utf-8'))
     for video in input_file:
         model.addVideo(catalog, video)
@@ -54,8 +54,8 @@ def loadCategories(catalog):
     for category in input_file:
         model.addCategories(catalog, category)
 
-def sort_videos(catalog, tipo, tamano):
-    return model.sort_videos(catalog, tipo, tamano)
+def sort_videos(catalog):
+    return model.sort_videos(catalog)
 
 def find_position_category():
     
