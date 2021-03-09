@@ -50,31 +50,7 @@ def initCatalog(option):
 def loadData(catalog):
     controller.loadData(catalog)
 
-def ejecutar_opcion1():
-
-    pass
-
-def ejecutar_opcion2():
-
-    pass
-
-def ejecutar_opcion3():
-    #Requerimiento 2 del laboratorio (estudiante A, individual)
-    pass
-
-def ejecutar_opcion4():
-    #Requerimiento 3 del laboratorio (estudiante B, individual)
-    pass
-
-def ejecutar_opcion5():
-
-    pass
-
-def ejecutar_opcion0():
-
-    pass
-
-catalog = None #Ni idea por qué esto
+catalog = None 
 
 """
 Programa Principal
@@ -83,15 +59,15 @@ while True:
     printMenu()
     opcion = int(input('Seleccione una opción para continuar\n'))
     if opcion==1:
-        ejecutar_opcion1()
+        pass
     elif opcion==2:
-        ejecutar_opcion2()
+        pass
     elif opcion==3:
-        ejecutar_opcion3()
+        pass
     elif opcion==4:
-        ejecutar_opcion4()
+        pass
     elif opcion==5:
-        ejecutar_opcion5()
+        pass
     elif opcion==0:
         sys.exit(0)
 
