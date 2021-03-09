@@ -51,8 +51,31 @@ def loadData(catalog):
     controller.loadData(catalog)
     #controller.sort_videos(catalog)
 
+def ejecutar_opcion1():
 
-catalog = None
+    pass
+
+def ejecutar_opcion2():
+
+    pass
+
+def ejecutar_opcion3():
+
+    pass
+
+def ejecutar_opcion4():
+
+    pass
+
+def ejecutar_opcion5():
+
+    pass
+
+def ejecutar_opcion0():
+
+    pass
+
+catalog = None #Ni idea por qué esto
 
 """
 Menu principal
