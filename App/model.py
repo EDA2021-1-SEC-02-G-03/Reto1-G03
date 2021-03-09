@@ -39,50 +39,71 @@ assert cf
 Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las categorias de
 los mismos.
 """
-def newCatalog(option):
+def newCatalog():
     catalog = {'videos':None,
                'categories':None}
-# Construccion de modelos
-    tipo_de_lista = ''
-    if option == '1':
-        tipo_de_lista = 'ARRAY_LIST'
-    elif option == '2':
-        tipo_de_lista = 'LINKED_LIST'
+    catalog['videos'] = lt.newList(datastructure='ARRAY_LIST') #videos = []
+    catalog['categories'] = lt.newList(datastructure='ARRAY_LIST') #categories = []
+    catalog['country_videos'] = lt.newList(datastructure='ARRAY_LIST')
+    catalog['country_location'] = lt.newList(datastructure='ARRAY_LIST')
 
-    catalog['videos'] = lt.newList(datastructure=tipo_de_lista)
-    catalog['categories'] = lt.newList(datastructure=tipo_de_lista)
     return catalog
 
-# Funciones para agregar información al catalogo
+# Funciones para agregar informacion al catalogo
 def addVideo(catalog, video):
     lt.addLast(catalog['videos'], video)
 
+
 def addCategories(catalog, category):
+    #c = newCategory(category['id'], category['name'])
     lt.addLast(catalog['categories'], category)
+
+def addCountryVideo(catalog):
+    for country in range(lt.size(catalog['videos'])):
+        element = lt.getElement(catalog['videos'], country)
+        lt.addLast(catalog['country_videos'], element)
+
 # Funciones para creacion de datos
 
 # Funciones de consulta
-def find_position_category(category_list, id, category_s, category):
-    #for element in range(lt.size(category_list)):
-        #if category
-    pass
+def find_position_category(catalog, category):
+    for runner in range(lt.size(catalog)):
+        element = lt.getElement(catalog, runner)
+        print(element['name'], category) 
+        if element['name'].strip() == category.strip():
+            return element['id']
+    return False
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 def cmpVideosByViews(video1, video2):
     #Esta función devuelve True si "views" video1 < video2
-    return (int(video1['views']) < int(video2['views']))
+    return (int(video1['views']) > int(video2['views']))
 
     #def comparSections()
+def cmpVideosByCountry(country1, country2):
+    return (country1['country'] > country2['country'])
 # Funciones de ordenamiento    
-def sort_videos(catalog, tipo, tamano):
-    sub_list = lt.subList(catalog['videos'], 0, tamano)
-    start_time = time.process_time()
-    if tipo == 1:
-        sorted_list = qus.sort(sub_list, cmpVideosByViews)
-    elif tipo == 2:
-        sorted_list = mgs.sort(sub_list, cmpVideosByViews)
-    #elif tipo == 3:
-    #    sorted_list = sa.sort(sub_list, cmpVideosByViews)
-    stop_time = time.process_time()
-    elapsed_time_mseg = (stop_time - start_time)*1000
-    return elapsed_time_mseg, sorted_list
+
+def cmpVideosByCategory(category1, category2):
+    return (category1['category_id'] > category2['category_id'])
+
+def sort_countries(catalog):
+    sorted_list = mgs.sort(catalog['country_videos'], cmpVideosByCountry)
+    return sorted_list
+
+def sort_categories(catalog):
+    sorted_list = mgs.sort(catalog['country_videos'], cmpVideosByCategory)
+    return sorted_list
+
+def create_map_countries(catalog):
+    for something in range(lt.size(catalog)):
+        element = lt.getElement(catalog['country_videos'])
+    pass
+
+def sort_videos(catalog):
+    #start_time = time.process_time()
+    sorted_list = mgs.sort(catalog['videos'], cmpVideosByViews)
+    sorted_list = mgs.sort(catalog['country_videos'], cmpVideosByViews)
+    #stop_time = time.process_time()
+    #elapsed_time_mseg = (stop_time - start_time)*1000
+    return sorted_list
