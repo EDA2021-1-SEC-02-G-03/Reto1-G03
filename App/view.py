@@ -50,48 +50,51 @@ def initCatalog(option):
 def loadData(catalog):
     controller.loadData(catalog)
 
+def ejecutar_opcion1():
+    
+    pass
 
+def ejecutar_opcion2():
 
-catalog = None
+    pass
+
+def ejecutar_opcion3():
+    #Requerimiento 2 del laboratorio (estudiante A, individual)
+    pass
+
+def ejecutar_opcion4():
+    #Requerimiento 3 del laboratorio (estudiante B, individual)
+    pass
+
+def ejecutar_opcion5():
+
+    pass
+
+def ejecutar_opcion0():
+
+    pass
+
+catalog = None #Ni idea por qué esto
 
 """
-Menu principal
+Programa Principal
 """
 while True:
     printMenu()
-    inputs = input('Seleccione una opción para continuar\n')
-    if int(inputs[0]) == 1:
-        opciones = ['1', '2']
-        print("Cargando información de los archivos ....")
-        tipo_lista = input("\n" + "A continuación los tipos de representación de lista que puede escoger \n" 
-        +"1- ARRAY_LIST \n" + "2- LINKED_LIST\n")
-        
-        if tipo_lista not in opciones:
-            print("Escoja una opción valida de lista")
-        else:
-            catalog = initCatalog(tipo_lista)
-            loadData(catalog)
-            print('Videos cargados: '+str(lt.size(catalog['videos'])))
-            informacion1 = lt.getElement(catalog['videos'], 1)
-            print('title: ' + str(informacion1['title'])+'\n' +'Channel title: '+ str(informacion1['channel_title']+'\n') 
-            +'trending date: '+ str(informacion1['trending_date'])+'\n' +'country: '+ str(informacion1['country'])+'\n' +
-            'views: '+str(informacion1['views'])+'\n' +'likes:'+ str(informacion1['likes'])+'\n' +'dislikes: '+ str(informacion1['dislikes'])+'\n')
-            print('Categorias cargadas: ')
-            print('id ', 'name')
-            for i in range(lt.size(catalog['categories'])):
-                element = lt.getElement(catalog['categories'], i)
-                print(element['id'], element['name'])
-
-    elif int(inputs[0]) == 2:
-        tamano_datos_cargados = lt.size(catalog['videos'])+1
-        tamano_lista = int(input('Ingrese el número de videos que quiere listar: '))
-        if tamano_lista > tamano_datos_cargados:
-            print("El número que ingresó excede la cantidad de videos cargados")
-        tipo_ordenamiento = int(input('Ingrese el número del tipo de algoritmo de ordenamiento que desea\n 1- Quick Sort \n 2- Merge Sort \n'))
-        result = controller.sort_videos(catalog, tipo_ordenamiento, tamano_lista)
-        print("Para la muestra de ",tamano_lista,
-        "elementos, el tiempo (mseg) es: ", str(result[0]))
-    else:
-    
+    opcion = int(input('Seleccione una opción para continuar\n'))
+    if opcion==1:
+        ejecutar_opcion1()
+    elif opcion==2:
+        ejecutar_opcion2()
+    elif opcion==3:
+        ejecutar_opcion3()
+    elif opcion==4:
+        ejecutar_opcion4()
+    elif opcion==5:
+        ejecutar_opcion5()
+    elif opcion==0:
         sys.exit(0)
+
+
+
 sys.exit(0)
