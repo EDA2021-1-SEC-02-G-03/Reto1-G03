@@ -40,7 +40,11 @@ def initCatalog():
 def loadData(catalog):
     loadVideos(catalog)
     loadCategories(catalog)
+    loadCountriesVideos(catalog)
     sort_videos(catalog)
+    sort_categories(catalog)
+    sort_countries(catalog)
+    
 
 def loadVideos(catalog):
     videos_file = cf.data_dir + 'videos/videos-small.csv'
@@ -52,12 +56,22 @@ def loadCategories(catalog):
     videos_file = cf.data_dir + 'videos/category-id.csv'
     input_file = csv.DictReader(open(videos_file, encoding='utf-8'), delimiter='\t')
     for category in input_file:
+        #ix_category = {category['name']:category['id']}
         model.addCategories(catalog, category)
+        #print(category)
+
+def loadCountriesVideos(catalog):
+    model.addCountryVideo(catalog)
 
 def sort_videos(catalog):
     return model.sort_videos(catalog)
 
-def find_position_category():
-    
-    pass
+def sort_countries(catalog):
+    return model.sort_countries(catalog)
+
+def sort_categories(catalog):
+    return model.sort_categories(catalog)
+
+def find_position_category(catalog, category):
+    return model.find_position_category(catalog, category)
 # Funciones de consulta sobre el catálogo

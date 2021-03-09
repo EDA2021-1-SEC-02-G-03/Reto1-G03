@@ -49,8 +49,6 @@ def initCatalog():
 
 def loadData(catalog):
     controller.loadData(catalog)
-    #controller.sort_videos(catalog)
-
 
 catalog = None
 
@@ -65,6 +63,7 @@ while True:
         #Cargamos los datos
         catalog = initCatalog()
         loadData(catalog)
+        #catalog_by_countries = controller.sort_countries(catalog)
         #Se hace print de la información de videos cargados
         print('Videos cargados: '+str(lt.size(catalog['videos'])))
         informacion1 = lt.getElement(catalog['videos'], 1)
@@ -74,20 +73,33 @@ while True:
         print('Categorias cargadas: ')
 
         print('id ', 'name')
+        #print(catalog['categories'])
         for i in range(lt.size(catalog['categories'])):
             element = lt.getElement(catalog['categories'], i)
             print(element['id'], element['name'])
+            #print(element)
 
     elif int(inputs[0]) == 2:
+
         tamano_datos_cargados = lt.size(catalog['videos'])+1
-        #category_name = input('Ingrese una categoria')
-        #country = input('Ingrese un país')
+        category_name = input('Ingrese una categoria: ')
+        id_number = controller.find_position_category(catalog['categories'], category_name)
+        print(id_number)
         tamano_lista = int(input('Ingrese el número de videos que quiere listar: '))
         if tamano_lista > tamano_datos_cargados:
             print("El número que ingresó excede la cantidad de videos cargados")
+        
+        #print(catalog['categories'])
+
         for i in range(1, 5):
-            element = lt.getElement(catalog['videos'], i)
-            print(element['channel_title'], element['category_id'], element['views'])
+
+            element = lt.getElement(catalog['country_videos'], i)
+            print(element)
+            #print(element['category_id'],element['country'],element['views'])
+        # print('----------------------------------------------------')
+        # for i in range(1, 200):
+        #     element = lt.getElement(catalog['videos'], i)
+        #     print(element['category_id'],element['country'],element['views'])
     else:
     
         sys.exit(0)
