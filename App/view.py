@@ -60,11 +60,11 @@ def ejecutar_opcion2():
     pass
 
 def ejecutar_opcion3():
-
+    #Requerimiento 2 del laboratorio (estudiante A, individual)
     pass
 
 def ejecutar_opcion4():
-
+    #Requerimiento 3 del laboratorio (estudiante B, individual)
     pass
 
 def ejecutar_opcion5():
