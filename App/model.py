@@ -36,22 +36,68 @@ from DISClib.Algorithms.Sorting import quicksort as qus
 assert cf
 
 """
-Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las categorias de
+Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas como mínimo, una para los videos, otra para las categorias de
 los mismos.
+
+Se agregan listas al catalogo para mejorar la eficiencia del programa.
 """
 def newCatalog():
     catalog = {'videos':None,
                'categories':None}
-    catalog['videos'] = lt.newList(datastructure='ARRAY_LIST') #videos = []
-    catalog['categories'] = lt.newList(datastructure='ARRAY_LIST') #categories = []
+    catalog['videos'] = lt.newList(datastructure='ARRAY_LIST') 
+    catalog['categories'] = lt.newList(datastructure='ARRAY_LIST') 
     catalog['country_videos'] = lt.newList(datastructure='ARRAY_LIST')
     catalog['country_location'] = lt.newList(datastructure='ARRAY_LIST')
-
+    catalog['category_videos'] = lt.newList(datastructure='ARRAY_LIST')
     return catalog
+
+def indexdict(catalog):
+    datos=lt.newList(datastructure='ARRAY_LIST')
+    dicti={}
+    print(catalog['videos'])
+    '''
+    for i in catalog['categories']:
+        print(i)
+        dicti[i]='ola'
+        print(dicti)
+    '''
 
 # Funciones para agregar informacion al catalogo
 def addVideo(catalog, video):
     lt.addLast(catalog['videos'], video)
+
+def VideosTrendingDaysCategory(catalog,category_id:str):
+    lista=catalog['category_videos']
+    trendingdays={}
+    channels={}
+    for i in range(lt.size(lista)):
+        element=lt.getElement(lista,i)
+        e=i
+        while str(element['category_id'])==str(category_id):
+            element=lt.getElement(lista,e)
+            if element['title'] not in trendingdays:
+                trendingdays[element['title']]=1
+                channel=element['channel_title']
+                title=element['title']
+                channels[title]=channel
+            elif element['title'] in trendingdays:
+                trendingdays[element['title']]+=1
+            e+=1
+        if len(trendingdays)>0 or i>=lt.size(lista):
+            break 
+    numeromayor=0
+    mayor=''
+    for i in trendingdays:
+        actual=trendingdays[i]
+        if numeromayor==0:
+            mayor=i
+            numeromayor=trendingdays[i]
+        elif actual>numeromayor:
+            numeromayor=actual
+    return [mayor,numeromayor,channels]   
+            
+def add_videosbycategory(catalog,video):
+    lt.addLast(catalog['category_videos'],video)
 
 
 def addCategories(catalog, category):
@@ -87,6 +133,7 @@ def cmpVideosByCountry(country1, country2):
 def cmpVideosByCategory(category1, category2):
     return (category1['category_id'] > category2['category_id'])
 
+
 def sort_countries(catalog):
     sorted_list = mgs.sort(catalog['country_videos'], cmpVideosByCountry)
     return sorted_list
@@ -94,6 +141,9 @@ def sort_countries(catalog):
 def sort_categories(catalog):
     sorted_list = mgs.sort(catalog['country_videos'], cmpVideosByCategory)
     return sorted_list
+
+def sort_videos_by_category(catalog):
+    sorted_list=mgs.sort(catalog['category_videos'],cmpVideosByCategory)
 
 def create_map_countries(catalog):
     for something in range(lt.size(catalog)):
@@ -107,3 +157,4 @@ def sort_videos(catalog):
     #stop_time = time.process_time()
     #elapsed_time_mseg = (stop_time - start_time)*1000
     return sorted_list
+

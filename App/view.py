@@ -25,6 +25,7 @@ import sys
 import controller
 from DISClib.ADT import list as lt
 assert cf
+import model
 
 
 """
@@ -79,8 +80,10 @@ while True:
             print(element['id'], element['name'])
             #print(element)
     elif opcion==2:
+        #Este es el requerimiento 1 del reto 
         tamano_datos_cargados = lt.size(catalog['videos'])+1
         category_name = input('Ingrese una categoria: ')
+
         id_number = controller.find_position_category(catalog['categories'], category_name)
         print(id_number)
         tamano_lista = int(input('Ingrese el número de videos que quiere listar: '))
@@ -99,9 +102,14 @@ while True:
         #     element = lt.getElement(catalog['videos'], i)
         #     print(element['category_id'],element['country'],element['views'])
     elif opcion==3:
+        #Requerimiento 2(Camilo)
         pass
     elif opcion==4:
-        pass
+        #Requerimiento 3(Juan Andrés)
+        category_name=input('Por favor, teclee la categoría de la cual desea conocer el video con más días como tendencia: ')
+        resultado=(controller.most_trending_by_category(catalog,category_name))
+        print('El título del video con más días como tendencia en la categoría '+category_name+' es '+resultado[0]+'. El nombre del canal que lo subió es '+resultado[2][resultado[0]]+'. El identificador de la categoría del video es '+resultado[3]+'. Este video estuvo '+str(resultado[1])+' días como tendecia.')
+
     elif opcion==5:
         pass
     elif opcion==0:
