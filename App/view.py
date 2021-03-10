@@ -44,37 +44,13 @@ def printMenu():
     print("0- Salir")
 
 
-def initCatalog(option):
-    return controller.initCatalog(option)
+def initCatalog():
+    return controller.initCatalog()
 
 def loadData(catalog):
     controller.loadData(catalog)
 
-def ejecutar_opcion1():
-    
-    pass
-
-def ejecutar_opcion2():
-
-    pass
-
-def ejecutar_opcion3():
-    #Requerimiento 2 del laboratorio (estudiante A, individual)
-    pass
-
-def ejecutar_opcion4():
-    #Requerimiento 3 del laboratorio (estudiante B, individual)
-    pass
-
-def ejecutar_opcion5():
-
-    pass
-
-def ejecutar_opcion0():
-
-    pass
-
-catalog = None #Ni idea por qué esto
+catalog = None 
 
 """
 Programa Principal
@@ -83,15 +59,51 @@ while True:
     printMenu()
     opcion = int(input('Seleccione una opción para continuar\n'))
     if opcion==1:
-        ejecutar_opcion1()
+        print("Cargando información de los archivos ....")
+        #Cargamos los datos
+        catalog = initCatalog()
+        loadData(catalog)
+        #catalog_by_countries = controller.sort_countries(catalog)
+        #Se hace print de la información de videos cargados
+        print('Videos cargados: '+str(lt.size(catalog['videos'])))
+        informacion1 = lt.getElement(catalog['videos'], 1)
+        print('title: ' + str(informacion1['title'])+'\n' +'Channel title: '+ str(informacion1['channel_title']+'\n') 
+        +'trending date: '+ str(informacion1['trending_date'])+'\n' +'country: '+ str(informacion1['country'])+'\n' +
+        'views: '+str(informacion1['views'])+'\n' +'likes:'+ str(informacion1['likes'])+'\n' +'dislikes: '+ str(informacion1['dislikes'])+'\n')
+        print('Categorias cargadas: ')
+
+        print('id ', 'name')
+        #print(catalog['categories'])
+        for i in range(lt.size(catalog['categories'])):
+            element = lt.getElement(catalog['categories'], i)
+            print(element['id'], element['name'])
+            #print(element)
     elif opcion==2:
-        ejecutar_opcion2()
+        tamano_datos_cargados = lt.size(catalog['videos'])+1
+        category_name = input('Ingrese una categoria: ')
+        id_number = controller.find_position_category(catalog['categories'], category_name)
+        print(id_number)
+        tamano_lista = int(input('Ingrese el número de videos que quiere listar: '))
+        if tamano_lista > tamano_datos_cargados:
+            print("El número que ingresó excede la cantidad de videos cargados")
+        
+        #print(catalog['categories'])
+
+        for i in range(1, 5):
+
+            element = lt.getElement(catalog['country_videos'], i)
+            print(element)
+            #print(element['category_id'],element['country'],element['views'])
+        # print('----------------------------------------------------')
+        # for i in range(1, 200):
+        #     element = lt.getElement(catalog['videos'], i)
+        #     print(element['category_id'],element['country'],element['views'])
     elif opcion==3:
-        ejecutar_opcion3()
+        pass
     elif opcion==4:
-        ejecutar_opcion4()
+        pass
     elif opcion==5:
-        ejecutar_opcion5()
+        pass
     elif opcion==0:
         sys.exit(0)
 

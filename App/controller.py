@@ -32,18 +32,22 @@ El controlador se encarga de mediar entre la vista y el modelo.
 # Inicialización del Catálogo de libros
 #Aqui el option lo que va a hacer es permitirnos escoger entre
 #las opcoines de ARRY_LIST y LINKED_LIST
-def initCatalog(option):
-    catalog = model.newCatalog(option)
+def initCatalog():
+    catalog = model.newCatalog()
     return catalog
 
 # Funciones para la carga de datos
 def loadData(catalog):
     loadVideos(catalog)
     loadCategories(catalog)
-    #sort_videos(catalog, tipo)
-# Funciones de ordenamiento
+    loadCountriesVideos(catalog)
+    sort_videos(catalog)
+    sort_categories(catalog)
+    sort_countries(catalog)
+    
+
 def loadVideos(catalog):
-    videos_file = cf.data_dir + 'videos/videos-large.csv'
+    videos_file = cf.data_dir + 'videos/videos-small.csv'
     input_file = csv.DictReader(open(videos_file, encoding='utf-8'))
     for video in input_file:
         model.addVideo(catalog, video)
@@ -52,11 +56,22 @@ def loadCategories(catalog):
     videos_file = cf.data_dir + 'videos/category-id.csv'
     input_file = csv.DictReader(open(videos_file, encoding='utf-8'), delimiter='\t')
     for category in input_file:
+        #ix_category = {category['name']:category['id']}
         model.addCategories(catalog, category)
+        #print(category)
 
-def sort_videos(catalog, tipo, tamano):
-    return model.sort_videos(catalog, tipo, tamano)
+def loadCountriesVideos(catalog):
+    return model.addCountryVideo(catalog)
 
-def find_position_category():
-    pass
+def sort_videos(catalog):
+    return model.sort_videos(catalog)
+
+def sort_countries(catalog):
+    return model.sort_countries(catalog)
+
+def sort_categories(catalog):
+    return model.sort_categories(catalog)
+
+def find_position_category(catalog, category):
+    return model.find_position_category(catalog, category)
 # Funciones de consulta sobre el catálogo
