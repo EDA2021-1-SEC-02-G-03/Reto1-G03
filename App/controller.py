@@ -38,14 +38,29 @@ def initCatalog():
 
 # Funciones para la carga de datos
 def loadData(catalog):
+    #Loading
     loadVideos(catalog)
     loadCategories(catalog)
     loadCountriesVideos(catalog)
     loadVideosbyCategory(catalog)
+    # sort_videos(catalog)
+    # sort_categories(catalog)
+    # sort_countries(catalog)
+    sort_videos_by_category(catalog)
+    loadCategoryTrendingVideo(catalog)
+    loadCountriesLikes(catalog)
+    #Sorting
     sort_videos(catalog)
     sort_categories(catalog)
     sort_countries(catalog)
-    sort_videos_by_category(catalog)
+    sort_id_videos(catalog)
+    sort_countriesR2D2(catalog)
+    sort_videos_likes(catalog)
+    sort_countries3PO(catalog)
+    sort_id_videos_RT(catalog)
+    sort_categories4TPO(catalog)
+    create_map_country(catalog)
+    create_map_category(catalog)
     
 
 def loadVideos(catalog):
@@ -70,6 +85,19 @@ def loadVideosbyCategory(catalog):
     for i in range(lt.size(catalog['videos'])):
         element=lt.getElement(catalog['videos'],i)
         model.add_videosbycategory(catalog,element)
+    #model.addCountryVideo(catalog)
+
+def loadCategoryTrendingVideo(catalog):
+    model.addTrendingCategoryVideo(catalog)
+
+def loadCountriesLikes(catalog):
+    model.addLikedVideo(catalog)
+
+def create_map_country(catalog):
+    model.create_map_countries(catalog)
+
+def create_map_category(catalog):
+    model.create_map_categories(catalog)
 
 def sort_videos(catalog):
     return model.sort_videos(catalog)
@@ -107,4 +135,28 @@ def most_trending_by_category(catalog,category_name:str):
 
 
 
+def sort_id_videos(catalog):
+    return model.sort_id_videos(catalog)
+    #pass
+def sort_id_videos_RT(catalog):
+    return model.sort_id_videosV2(catalog)
+    #pass
+def sort_countriesR2D2(catalog):
+    return model.sort_countries_R2D2(catalog)
+    #return model.sort_countries(catalog)[1]
+    #pass
+def sort_countries3PO(catalog):
+    return model.sort_countries_R4(catalog)
+    #pass
+def sort_categories(catalog):
+    return model.sort_categories(catalog)
+
+def sort_categories4TPO(catalog):
+    return model.sort_categoriesV2(catalog)
+    #pass
+def sort_videos_likes(catalog):
+    return model.sort_liked_videos(catalog)
+
+def find_position_category(catalog, category):
+    return model.find_position_category(catalog, category)
 # Funciones de consulta sobre el catálogo
