@@ -105,7 +105,7 @@ def find_position_category(catalog, category):
 
 def most_trending_by_category(catalog,category_name:str):
     if category_name=='Film & Animation':
-        category_name=='  Film & Animation'
+        category_name='  Film & Animation'
     else:
         category_name=' '+category_name
 
