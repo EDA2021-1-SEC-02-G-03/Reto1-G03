@@ -61,11 +61,8 @@ while True:
     opcion = int(input('Seleccione una opción para continuar\n'))
     if opcion==1:
         print("Cargando información de los archivos ....")
-        #Cargamos los datos
         catalog = initCatalog()
         loadData(catalog)
-        #catalog_by_countries = controller.sort_countries(catalog)
-        #Se hace print de la información de videos cargados
         print('Videos cargados: '+str(lt.size(catalog['videos'])))
         informacion1 = lt.getElement(catalog['videos'], 1)
         print('title: ' + str(informacion1['title'])+'\n' +'Channel title: '+ str(informacion1['channel_title']+'\n') 
@@ -74,15 +71,9 @@ while True:
         print('Categorias cargadas: ')
 
         print('id ', 'name')
-        #print(catalog['categories'])
         for i in range(lt.size(catalog['categories'])):
             element = lt.getElement(catalog['categories'], i)
             print(element['id'], element['name'])
-            #print(element)
-        #print(catalog['category_map'])
-        # for i in range(1, 1000):
-        #     element = lt.getElement(catalog['category_trending_video'], i)
-        #     print(element['category_id'],element['video_id'], element['title'], element['country'])
 
     elif opcion == 2:
 
@@ -92,22 +83,20 @@ while True:
         country = input('Ingrese un país: ')
         tamano_lista = int(input('Ingrese el número de videos que quiere listar: '))
         if tamano_lista > tamano_datos_cargados:
-            print("El número que ingresó excede la cantidad de videos cargados")
+            print("El número que ingresó excede la cantidad de videos cargados.")
         
         country_map = lt.getElement(catalog['country_map'], 1)
 
         counter_data = 0
-        # for i in range(1, 1000):
-        #     element = lt.getElement(catalog['country_videos'], i)
-        #     print(element['video_id'], element['country'], element['category_id'], element['views'])
         for element in range(country_map[country][0]+1, country_map[country][1]):
             data = lt.getElement(catalog['country_videos'], element)
             if data['category_id'] == id_number:
                 counter_data += 1
                 if counter_data > tamano_lista:
                     break
-                print(data['title'], data['trending_date'], data['channel_title'],
-                data['publish_time'], data['views'], data['likes'], data['dislikes'])
+                
+                print('Título: '+data['title'], 'Fecha en tendencia: '+data['trending_date'], 'Canal'+data['channel_title'],
+                data['publish_time'], 'Vistas: '+data['views'],'Likes: '+data['likes'],'Dislikes: '+data['dislikes'])
 
     elif opcion == 3:
         country = input('Ingrese un país: ')
@@ -115,7 +104,6 @@ while True:
         bigger_moment = 0
         actual_video = ''
         actual_winner = 0
-        #video_winner = ''
         for element in range(country_map[country][0]+1, country_map[country][1]):
             data = lt.getElement(catalog['videos'], element)
             if data['video_id'] != actual_video:
@@ -126,13 +114,11 @@ while True:
                 actual_winner = bigger_moment
                 video_winner = element
         winner = lt.getElement(catalog['videos'], video_winner)
-        print(winner['title'], winner['channel_title'], winner['country'], actual_winner)
-            #print(data['country'], data['video_id'], data['views'])
+        print(winner['title'], 'Canal: '+winner['channel_title'], 'País: '+winner['country'], 'Días como tendencia: '+str(actual_winner))
     elif opcion == 4:
         category_name=input('Por favor, teclee la categoría de la cual desea conocer el video con más días como tendencia: ')
         resultado=(controller.most_trending_by_category(catalog,category_name))
-        #print('El título del video con más días como tendencia en la categoría '+category_name+' es '+resultado[0]+'. El nombre del canal que lo subió es '+resultado[2][resultado[0]]+'. El identificador de la categoría del video es '+resultado[3]+'. Este video estuvo '+str(resultado[1])+' días como tendecia.')
-        print(resultado[0], resultado[2][resultado[0]], resultado[3], str(resultado[1]))
+        print('Título: '+resultado[0], 'Canal: '+resultado[2][resultado[0]], 'Category ID: '+resultado[3], 'Días como tendencia: '+str(resultado[1]))
     elif opcion == 5:
         country = input('Ingrese un país: ')
         tamano_lista = int(input('Ingrese el número de videos que quiere listar: '))
@@ -147,9 +133,6 @@ while True:
                     break
                 print(data['title'], data['channel_title'], data['views'], 
                 data['likes'])
-        # for i in range(1, 1000):
-        #     data = lt.getElement(catalog['liked_videos'], i)
-        #     print(data['country'], data['likes'])
     else:
         sys.exit(0)
 

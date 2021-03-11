@@ -49,8 +49,8 @@ def newCatalog():
                'liked_videos':None,
                'country_map':None, 
                'category_map':None}
-    catalog['videos'] = lt.newList(datastructure='ARRAY_LIST') #videos = []
-    catalog['categories'] = lt.newList(datastructure='ARRAY_LIST') #categories = []
+    catalog['videos'] = lt.newList(datastructure='ARRAY_LIST') 
+    catalog['categories'] = lt.newList(datastructure='ARRAY_LIST')
     catalog['country_videos'] = lt.newList(datastructure='ARRAY_LIST')
     catalog['category_trending_video'] = lt.newList(datastructure='ARRAY_LIST')
     catalog['liked_videos'] = lt.newList(datastructure='ARRAY_LIST')
@@ -64,14 +64,8 @@ def indexdict(catalog):
     datos=lt.newList(datastructure='ARRAY_LIST')
     dicti={}
     print(catalog['videos'])
-    '''
-    for i in catalog['categories']:
-        print(i)
-        dicti[i]='ola'
-        print(dicti)
-    '''
 
-# Funciones para agregar informacion al catalogo
+
 def addVideo(catalog, video):
     lt.addLast(catalog['videos'], video)
 
@@ -110,7 +104,6 @@ def add_videosbycategory(catalog,video):
 
 
 def addCategories(catalog, category):
-    #c = newCategory(category['id'], category['name'])
     lt.addLast(catalog['categories'], category)
 
 def addCountryVideo(catalog):
@@ -127,9 +120,7 @@ def addTrendingCategoryVideo(catalog):
     for country in range(lt.size(catalog['videos'])):
         element = lt.getElement(catalog['videos'], country)
         lt.addLast(catalog['category_trending_video'], element)
-# Funciones para creacion de datos
 
-# Funciones de consulta
 def find_position_category(catalog, category):
     for runner in range(lt.size(catalog)):
         element = lt.getElement(catalog, runner)
@@ -137,15 +128,11 @@ def find_position_category(catalog, category):
             return element['id']
     return False
 
-# Funciones utilizadas para comparar elementos dentro de una lista
 def cmpVideosByViews(video1, video2):
-    #Esta función devuelve True si "views" video1 < video2
     return (int(video1['views']) > int(video2['views']))
 
-    #def comparSections()
 def cmpVideosByCountry(country1, country2):
-    return (country1['country'] > country2['country'])
-# Funciones de ordenamiento    
+    return (country1['country'] > country2['country'])   
 
 def cmpVideosByCategory(category1, category2):
     return (category1['category_id'] > category2['category_id'])
@@ -158,9 +145,7 @@ def cmpVideosByLikes(like1, like2):
 
 def sort_countries(catalog):
     sorted_list = mgs.sort(catalog['country_videos'], cmpVideosByCountry)
-    #sorted_listR2 = mgs.sort(catalog['videos'], cmpVideosByCountry)
-    #sorted_listR4 = mgs.sort(catalog['liked_videos'], cmpVideosByCountry)
-    return sorted_list#, sorted_listR2, sorted_listR4
+    return sorted_list
 
 def sort_countries_R2D2(catalog):
     sorted_list = mgs.sort(catalog['videos'], cmpVideosByCountry)
@@ -172,26 +157,22 @@ def sort_countries_R4(catalog):
 
 def sort_categories(catalog):
     sorted_list = mgs.sort(catalog['country_videos'], cmpVideosByCategory)
-    #sorted_list4TPO = mgs.sort(catalog['category_trending_video'], cmpVideosByCategory)
-    return sorted_list#, sorted_list4TPO 
+    return sorted_list
 
 def sort_videos_by_category(catalog):
     sorted_list=mgs.sort(catalog['category_videos'],cmpVideosByCategory)
 
 def sort_categoriesV2(catalog):
     sorted_list = mgs.sort(catalog['category_trending_video'], cmpVideosByCategory)
-    #sorted_list4TPO = mgs.sort(catalog['category_trending_video'], cmpVideosByCategory)
-    return sorted_list#, sorted_list4TPO 
+    return sorted_list
 
 def sort_id_videos(catalog):
     sorted_list = mgs.sort(catalog['videos'], cmpVideosByID)
-    #sorted_list4TPO = mgs.sort(catalog['category_trending_video'], cmpVideosByID)
-    return sorted_list#, sorted_list4TPO
+    return sorted_list
 
 def sort_id_videosV2(catalog):
-    #sorted_list = mgs.sort(catalog['videos'], cmpVideosByID)
     sorted_list4TPO = mgs.sort(catalog['category_trending_video'], cmpVideosByID)
-    return sorted_list4TPO#, sorted_list4TPO
+    return sorted_list4TPO
 
 def sort_liked_videos(catalog):
     sorted_list = mgs.sort(catalog['liked_videos'], cmpVideosByLikes)
@@ -205,7 +186,7 @@ def create_map_countries(catalog):
     initial_phase = 0
     for something in range(1, lt.size(catalog['country_videos'])):
         position = []
-        element = lt.getElement(catalog['country_videos'], something)#catalog['country_videos']
+        element = lt.getElement(catalog['country_videos'], something)
         if element['country'] not in check_list or something == lt.size(catalog['country_videos'])-1:
             check_list.append(element['country'])
             if counter > 1:
@@ -224,7 +205,7 @@ def create_map_categories(catalog):
     initial_phase = 0
     for something in range(1, lt.size(catalog['category_trending_video'])):
         position = []
-        element = lt.getElement(catalog['category_trending_video'], something)#catalog['country_videos']
+        element = lt.getElement(catalog['category_trending_video'], something)
         if element['category_id'] not in check_list or something == lt.size(catalog['category_trending_video'])-1:
             check_list.append(element['category_id'])
             if counter > 1:
@@ -236,9 +217,5 @@ def create_map_categories(catalog):
     lt.addLast(catalog['category_map'], countries)
 
 def sort_videos(catalog):
-    #start_time = time.process_time()
-    #sorted_list = mgs.sort(catalog['videos'], cmpVideosByViews)
     sorted_list = mgs.sort(catalog['country_videos'], cmpVideosByViews)
-    #stop_time = time.process_time()
-    #elapsed_time_mseg = (stop_time - start_time)*1000
     return sorted_list

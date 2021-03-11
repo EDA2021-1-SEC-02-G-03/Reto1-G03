@@ -29,27 +29,18 @@ from DISClib.ADT import list as lt
 El controlador se encarga de mediar entre la vista y el modelo.
 """
 
-# Inicialización del Catálogo de libros
-#Aqui el option lo que va a hacer es permitirnos escoger entre
-#las opcoines de ARRY_LIST y LINKED_LIST
 def initCatalog():
     catalog = model.newCatalog()
     return catalog
 
-# Funciones para la carga de datos
 def loadData(catalog):
-    #Loading
     loadVideos(catalog)
     loadCategories(catalog)
     loadCountriesVideos(catalog)
     loadVideosbyCategory(catalog)
-    # sort_videos(catalog)
-    # sort_categories(catalog)
-    # sort_countries(catalog)
     sort_videos_by_category(catalog)
     loadCategoryTrendingVideo(catalog)
     loadCountriesLikes(catalog)
-    #Sorting
     sort_videos(catalog)
     sort_categories(catalog)
     sort_countries(catalog)
@@ -64,7 +55,7 @@ def loadData(catalog):
     
 
 def loadVideos(catalog):
-    videos_file = cf.data_dir + 'videos/videos-large.csv'
+    videos_file = cf.data_dir + 'videos/videos-small.csv'
     input_file = csv.DictReader(open(videos_file, encoding='utf-8'))
     for video in input_file:
         model.addVideo(catalog, video)
@@ -73,9 +64,8 @@ def loadCategories(catalog):
     videos_file = cf.data_dir + 'videos/category-id.csv'
     input_file = csv.DictReader(open(videos_file, encoding='utf-8'), delimiter='\t')
     for category in input_file:
-        #ix_category = {category['name']:category['id']}
         model.addCategories(catalog, category)
-        #print(category)
+
 
 def loadCountriesVideos(catalog):
     return model.addCountryVideo(catalog)
@@ -85,7 +75,6 @@ def loadVideosbyCategory(catalog):
     for i in range(lt.size(catalog['videos'])):
         element=lt.getElement(catalog['videos'],i)
         model.add_videosbycategory(catalog,element)
-    #model.addCountryVideo(catalog)
 
 def loadCategoryTrendingVideo(catalog):
     model.addTrendingCategoryVideo(catalog)
@@ -137,26 +126,25 @@ def most_trending_by_category(catalog,category_name:str):
 
 def sort_id_videos(catalog):
     return model.sort_id_videos(catalog)
-    #pass
+
 def sort_id_videos_RT(catalog):
     return model.sort_id_videosV2(catalog)
-    #pass
+
 def sort_countriesR2D2(catalog):
     return model.sort_countries_R2D2(catalog)
-    #return model.sort_countries(catalog)[1]
-    #pass
+
 def sort_countries3PO(catalog):
     return model.sort_countries_R4(catalog)
-    #pass
+
 def sort_categories(catalog):
     return model.sort_categories(catalog)
 
 def sort_categories4TPO(catalog):
     return model.sort_categoriesV2(catalog)
-    #pass
+
 def sort_videos_likes(catalog):
     return model.sort_liked_videos(catalog)
 
 def find_position_category(catalog, category):
     return model.find_position_category(catalog, category)
-# Funciones de consulta sobre el catálogo
+
