@@ -26,7 +26,8 @@ import controller
 from DISClib.ADT import list as lt
 assert cf
 import model
-
+import time
+import tracemalloc
 
 """
 La vista se encarga de la interacción con el usuario
@@ -62,7 +63,7 @@ while True:
     if opcion==1:
         print("Cargando información de los archivos ....")
         catalog = initCatalog()
-        loadData(catalog)
+        data = controller.loadData(catalog)
         print('Videos cargados: '+str(lt.size(catalog['videos'])))
         informacion1 = lt.getElement(catalog['videos'], 1)
         print('title: ' + str(informacion1['title'])+'\n' +'Channel title: '+ str(informacion1['channel_title']+'\n') 
@@ -74,7 +75,8 @@ while True:
         for i in range(lt.size(catalog['categories'])):
             element = lt.getElement(catalog['categories'], i)
             print(element['id'], element['name'])
-
+        
+        print('Tiempo [ms]: ', f"{data[0]:.3f}", "-", "Memoria [kB]: ", f"{data[1]:.3f}")
     elif opcion == 2:
 
         tamano_datos_cargados = lt.size(catalog['videos'])+1
@@ -87,6 +89,13 @@ while True:
         
         country_map = lt.getElement(catalog['country_map'], 1)
 
+        delta_time = -1.0
+        delta_memory = -1.0
+
+        tracemalloc.start()
+        start_time = controller.getTime()
+        start_memory = controller.getMemory()
+
         counter_data = 0
         for element in range(country_map[country][0]+1, country_map[country][1]):
             data = lt.getElement(catalog['country_videos'], element)
@@ -97,6 +106,14 @@ while True:
                 
                 print('Título: '+data['title'], 'Fecha en tendencia: '+data['trending_date'], 'Canal'+data['channel_title'],
                 data['publish_time'], 'Vistas: '+data['views'],'Likes: '+data['likes'],'Dislikes: '+data['dislikes'])
+        
+        stop_memory = controller.getMemory()
+        stop_time = controller.getTime()
+        tracemalloc.stop()
+
+        delta_time = stop_time - start_time
+        delta_memory = controller.deltaMemory(start_memory, stop_memory)
+        print('Tiempo[ms]: ', f"{delta_time:.3f}", "-", "Memoria [kB]: ", f"{delta_memory:.3f}")
 
     elif opcion == 3:
         country = input('Ingrese un país: ')
@@ -104,6 +121,14 @@ while True:
         bigger_moment = 0
         actual_video = ''
         actual_winner = 0
+
+        delta_time = -1.0
+        delta_memory = -1.0
+
+        tracemalloc.start()
+        start_time = controller.getTime()
+        start_memory = controller.getMemory()
+
         for element in range(country_map[country][0]+1, country_map[country][1]):
             data = lt.getElement(catalog['videos'], element)
             if data['video_id'] != actual_video:
@@ -115,14 +140,49 @@ while True:
                 video_winner = element
         winner = lt.getElement(catalog['videos'], video_winner)
         print(winner['title'], 'Canal: '+winner['channel_title'], 'País: '+winner['country'], 'Días como tendencia: '+str(actual_winner))
+
+        stop_memory = controller.getMemory()
+        stop_time = controller.getTime()
+        tracemalloc.stop()
+
+        delta_time = stop_time - start_time
+        delta_memory = controller.deltaMemory(start_memory, stop_memory)
+        print('Tiempo[ms]: ', f"{delta_time:.3f}", "-", "Memoria [kB]: ", f"{delta_memory:.3f}")
+
     elif opcion == 4:
         category_name=input('Por favor, teclee la categoría de la cual desea conocer el video con más días como tendencia: ')
+        
+        delta_time = -1.0
+        delta_memory = -1.0
+
+        tracemalloc.start()
+        start_time = controller.getTime()
+        start_memory = controller.getMemory()
+
         resultado=(controller.most_trending_by_category(catalog,category_name))
         print('Título: '+resultado[0], 'Canal: '+resultado[2][resultado[0]], 'Category ID: '+resultado[3], 'Días como tendencia: '+str(resultado[1]))
+    
+        stop_memory = controller.getMemory()
+        stop_time = controller.getTime()
+        tracemalloc.stop()
+
+        delta_time = stop_time - start_time
+        delta_memory = controller.deltaMemory(start_memory, stop_memory)
+        print('Tiempo[ms]: ', f"{delta_time:.3f}", "-", "Memoria [kB]: ", f"{delta_memory:.3f}")
+
     elif opcion == 5:
         country = input('Ingrese un país: ')
         tamano_lista = int(input('Ingrese el número de videos que quiere listar: '))
         tag = input('Ingrese el tag del video: ')
+
+        delta_time = -1.0
+        delta_memory = -1.0
+
+        tracemalloc.start()
+        start_time = controller.getTime()
+        start_memory = controller.getMemory()
+
+
         country_map = lt.getElement(catalog['country_map'], 1)
         counter_data = 0
         for element in range(country_map[country][0]+1, country_map[country][1]):
@@ -133,6 +193,15 @@ while True:
                     break
                 print(data['title'], data['channel_title'], data['views'], 
                 data['likes'])
+
+        stop_memory = controller.getMemory()
+        stop_time = controller.getTime()
+        tracemalloc.stop()
+
+        delta_time = stop_time - start_time
+        delta_memory = controller.deltaMemory(start_memory, stop_memory)
+        print('Tiempo[ms]: ', f"{delta_time:.3f}", "-", "Memoria [kB]: ", f"{delta_memory:.3f}")
+
     else:
         sys.exit(0)
 
